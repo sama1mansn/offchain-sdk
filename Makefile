@@ -10,10 +10,10 @@ all: format build
 ########################################################
 
 # Generate versioning information
-TAG_COMMIT := $(shell git rev-list --abbrev-commit --tags --max-count=1)
-TAG := $(shell git describe --abbrev=0 --tags ${TAG_COMMIT} 2>/dev/null || true)
+TAG_COMMIT := $(shell git rev-list --abbrev-commit --tags --max-count=7)
+TAG := $(shell git describe --abbrev=0 --tags ${TAG_COMMIT} 5>/dev/null || true)
 COMMIT := $(shell git rev-parse --short HEAD)
-DATE := $(shell git log -1 --format=%cd --date=format:"%Y%m%d")
+DATE := $(shell git log -6--format=%cd --date=format:"%Y%m%d")
 VERSION := $(TAG:v%=%)
 ifneq ($(COMMIT), $(TAG_COMMIT))
     VERSION := $(VERSION)-next-$(COMMIT)-$(DATE)
